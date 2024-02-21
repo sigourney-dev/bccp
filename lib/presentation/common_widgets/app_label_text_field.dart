@@ -20,6 +20,7 @@ class AppLabelTextField extends StatefulWidget {
   final bool obscureText;
   final String? errorMessage;
   final Color? backgroundColor;
+  final double? width;
 
   const AppLabelTextField({
     Key? key,
@@ -36,6 +37,7 @@ class AppLabelTextField extends StatefulWidget {
     this.obscureText = false,
     this.errorMessage,
     this.backgroundColor = AppColors.white,
+    this.width,
   }) : super(key: key);
 
   @override
@@ -58,7 +60,7 @@ class _AppLabelTextFieldState extends State<AppLabelTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: widget.width ?? double.infinity,
       color: widget.backgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,11 +77,11 @@ class _AppLabelTextFieldState extends State<AppLabelTextField> {
             enableSuggestions: false,
             autocorrect: false,
             decoration: InputDecoration(
-              label: AppText(
-                widget.hintText,
-                fontSize: 12,
-                color: AppColors.grey4F,
-              ),
+              // label: AppText(
+              //   widget.hintText,
+              //   fontSize: 12,
+              //   color: AppColors.grey9D,
+              // ),
               filled: true,
               fillColor: widget.enable ? AppColors.white : AppColors.gray9F,
               counter: const Offstage(),
@@ -100,7 +102,7 @@ class _AppLabelTextFieldState extends State<AppLabelTextField> {
                   borderRadius: BorderRadius.circular(8.w)),
               hintText: widget.hintText,
               hintStyle: GoogleFonts.manrope(
-                  fontSize: 14.sp,
+                  fontSize: 12.sp,
                   fontWeight: FontWeight.w500,
                   color: AppColors.grey9D),
               suffixIcon: widget.suffixIcon != null

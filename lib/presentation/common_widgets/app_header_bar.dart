@@ -9,21 +9,27 @@ import '/presentation/common_widgets/app_text.dart';
 class AppHeaderBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final bool showClose;
-  final List<Widget>? actions;
+  final List<Widget>? leftActions;
+  final List<Widget>? rightActions;
   final double? height;
   final Color? color;
   final Color? backgroundColor;
-  final Widget? icon;
+  final Widget? iconLeft;
+  final Widget? iconRight;
+  final Function? onTapRight;
 
   const AppHeaderBar({
     super.key,
     this.title,
     this.showClose = true,
-    this.actions,
+    this.leftActions,
+    this.rightActions,
     this.height,
     this.color,
     this.backgroundColor,
-    this.icon,
+    this.iconLeft,
+    this.iconRight,
+    this.onTapRight,
   });
 
   @override
@@ -40,21 +46,13 @@ class AppHeaderBar extends StatelessWidget implements PreferredSizeWidget {
       title: SizedBox(
         width: 1.sw,
         height: height ?? 40.h,
-        child: Stack(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(
-              child: AppText(
-                title ?? "",
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-                color: contentColor,
-              ),
-            ),
             SizedBox(
               height: height ?? 40.h,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Builder(builder: (context) {
                     if (showClose) {
@@ -62,7 +60,7 @@ class AppHeaderBar extends StatelessWidget implements PreferredSizeWidget {
                         onTap: () {
                           Navigator.of(context).pop();
                         },
-                        child: icon ??
+                        child: iconLeft ??
                             Assets.icons.arrowRight.svg(
                               width: 24.w,
                               height: 24.w,
@@ -75,8 +73,8 @@ class AppHeaderBar extends StatelessWidget implements PreferredSizeWidget {
                     return SizedBox(width: 10.w);
                   }),
                   Builder(builder: (context) {
-                    if (actions != null) {
-                      return Row(children: actions!);
+                    if (leftActions != null) {
+                      return Row(children: leftActions!);
                     }
 
                     return SizedBox(width: 10.w);
@@ -84,6 +82,50 @@ class AppHeaderBar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               ),
             ),
+            Center(
+              child: AppText(
+                title ?? "",
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w500,
+                color: contentColor,
+              ),
+            ),
+            iconRight != null
+                ? SizedBox(
+                    height: height ?? 40.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Builder(builder: (context) {
+                          if (showClose) {
+                            return GestureDetector(
+                              onTap: () {
+                                onTapRight ?? Navigator.of(context).pop();
+                              },
+                              child: iconRight ??
+                                  Assets.icons.arrowRight.svg(
+                                    width: 24.w,
+                                    height: 24.w,
+                                    colorFilter: ColorFilter.mode(
+                                        contentColor, BlendMode.srcIn),
+                                  ),
+                            );
+                          }
+
+                          return SizedBox(width: 10.w);
+                        }),
+                        Builder(builder: (context) {
+                          if (rightActions != null) {
+                            return Row(children: rightActions!);
+                          }
+
+                          return SizedBox(width: 10.w);
+                        }),
+                      ],
+                    ),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),

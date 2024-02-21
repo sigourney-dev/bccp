@@ -164,6 +164,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Star.svg
   SvgGenImage get star => const SvgGenImage('assets/icons/Star.svg');
 
+  /// File path: assets/icons/Three-Dot.svg
+  SvgGenImage get threeDot => const SvgGenImage('assets/icons/Three-Dot.svg');
+
   /// File path: assets/icons/Three-User-Selected.svg
   SvgGenImage get threeUserSelected =>
       const SvgGenImage('assets/icons/Three-User-Selected.svg');
@@ -232,6 +235,7 @@ class $AssetsIconsGen {
         search,
         starBorder,
         star,
+        threeDot,
         threeUserSelected,
         threeUser,
         tickSquare,
