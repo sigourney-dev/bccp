@@ -34,7 +34,15 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
       appBar: AppHeaderBar(
         title: 'Tạo mới Lead',
         iconLeft: Assets.icons.angleLeft.svg(),
-        iconRight: Assets.icons.threeDot.svg(),
+        iconRight: Text(
+          'Lưu',
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 16.sp,
+            color: AppColors.blueAC,
+          ),
+        ),
+        onTapRight: () {},
       ),
       body: BlocBuilder<CreateLeadCubit, CreateLeadState>(
         bloc: _createLeadCubit,
@@ -322,38 +330,11 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                                     ],
                                   )
                                 : SizedBox(
-                                    height: 18.h,
+                                    height: 0.h,
                                   ),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-
-                  /// Button
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 18.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AppButton(
-                          title: 'Huỷ',
-                          color: AppColors.greyF5,
-                          fontSize: 14.sp,
-                          textColor: AppColors.grey4F,
-                          width: 1.sw / 3,
-                        ),
-                        SizedBox(
-                          width: 32.w,
-                        ),
-                        AppButton(
-                          title: 'Lưu',
-                          color: AppColors.main,
-                          fontSize: 14.sp,
-                          textColor: AppColors.blue45,
-                          width: 1.sw / 3,
-                        ),
-                      ],
                     ),
                   ),
                 ],

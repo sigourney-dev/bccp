@@ -1,5 +1,8 @@
+import 'package:bccp/domain/models/arguments/lead_detail_arguments.dart';
 import 'package:bccp/presentation/screens/create_new_lead/create_lead_cubit.dart';
 import 'package:bccp/presentation/screens/create_new_lead/create_lead_screen.dart';
+import 'package:bccp/presentation/screens/lead_detail/lead_detail_cubit.dart';
+import 'package:bccp/presentation/screens/lead_detail/lead_detail_screen.dart';
 import 'package:bccp/presentation/screens/login/login_cubit.dart';
 import 'package:bccp/presentation/screens/reset_password/reset_password_screen.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +66,12 @@ class AppRouter {
         routeWidget = BlocProvider(
           create: (context) => CreateLeadCubit(),
           child: const CreateLeadScreen(),
+        );
+        break;
+      case RouteName.leadDetail:
+        routeWidget = BlocProvider(
+          create: (context) => LeadDetailCubit(),
+          child: LeadDetailScreen(arguments: arguments as LeadDetailArguments),
         );
         break;
       default:

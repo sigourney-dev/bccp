@@ -1,3 +1,4 @@
+import 'package:bccp/domain/models/arguments/lead_detail_arguments.dart';
 import 'package:bccp/presentation/screens/lead/lead_cubit.dart';
 import 'package:bccp/presentation/screens/lead/widget/lead_item.dart';
 import 'package:flutter/material.dart';
@@ -49,8 +50,17 @@ class _LeadScreenState extends State<LeadScreen> {
               child: Stack(
                 children: [
                   Column(
-                    children: List.generate(state.listLeads.length,
-                        (index) => LeadItem(leadItem: state.listLeads[index])),
+                    children: List.generate(
+                        state.listLeads.length,
+                        (index) => GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    RouteName.leadDetail, (route) => true,
+                                    arguments: LeadDetailArguments(
+                                        leadId: state.listLeads[index].id));
+                              },
+                              child: LeadItem(leadItem: state.listLeads[index]),
+                            )),
                   ),
                   Positioned(
                     right: 0,

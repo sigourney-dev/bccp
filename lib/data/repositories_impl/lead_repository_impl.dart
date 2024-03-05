@@ -3,6 +3,7 @@ import 'package:bccp/data/data_sources/api/api_client_provider.dart';
 import 'package:bccp/domain/models/request/lead/create_lead_request.dart';
 import 'package:bccp/domain/models/request/lead/lead_request.dart';
 import 'package:bccp/domain/models/response/lead/create_lead_response.dart';
+import 'package:bccp/domain/models/response/lead/lead_detail_response.dart';
 import 'package:bccp/domain/models/response/lead/lead_response.dart';
 import 'package:bccp/domain/repositories/lead_repository.dart';
 import 'package:either_dart/either.dart';
@@ -34,6 +35,20 @@ class LeadRepositoryImpl extends LeadRepository {
       CreateLeadRequest body) async {
     try {
       final response = await _apiClient!.createNewLead(body);
+      if (response.success) {
+        return Right(response.data!);
+      } else {
+        return Left(response.message);
+      }
+    } catch (error) {
+      return Left(error.toMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, LeadDetailResponse>> getLeadDetail(int id) async {
+    try {
+      final response = await _apiClient!.getLeadDetail(id);
       if (response.success) {
         return Right(response.data!);
       } else {

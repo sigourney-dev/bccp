@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:bccp/domain/models/request/lead/create_lead_request.dart';
 import 'package:bccp/domain/models/request/lead/task_request.dart';
+import 'package:bccp/domain/models/response/lead/lead_detail_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -46,4 +47,7 @@ abstract class ApiClient {
 
   @POST('/login')
   Future<ApiResponse<LoginResponse>> login(@Body() LoginRequest body);
+
+  @GET('/leads/{id}')
+  Future<ApiResponse<LeadDetailResponse>> getLeadDetail(@Path("id") int id);
 }

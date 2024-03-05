@@ -1,6 +1,7 @@
 import 'package:bccp/data/repositories_impl/lead_repository_impl.dart';
 import 'package:bccp/domain/repositories/lead_repository.dart';
 import 'package:bccp/presentation/screens/lead/lead_cubit.dart';
+import 'package:bccp/presentation/screens/lead_detail/lead_detail_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
@@ -30,6 +31,7 @@ Future<void> configureDependencies() async {
   getIt.registerLazySingleton<AccountCubit>(() => AccountCubit());
   getIt.registerLazySingleton<HomeCubit>(() => HomeCubit());
   getIt.registerLazySingleton<LeadCubit>(() => LeadCubit());
+  getIt.registerLazySingleton<LeadDetailCubit>(() => LeadDetailCubit());
 
 // repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl());
